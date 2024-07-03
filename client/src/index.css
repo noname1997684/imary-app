@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  *{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+@layer utilities{
+    .button-hover-1{
+        @apply rounded-md px-3 py-2 text-sm font-semibold text-base  hover:bg-gray-200 
+    }
+    .dot{
+        @apply w-3 h-3 bg-gray-200 rounded-full cursor-pointer 
+    
+    }
+    .yellow.active{
+        @apply bg-yellow-600
+      }
+    .blue.active{
+        @apply bg-blue-600
+      }
+    .green.active{
+        @apply bg-green-700
+      }
+    .orange.active{
+        @apply bg-orange-600
+      }
+    .yellow.choosen{
+        @apply text-yellow-600
+      }
+    .blue.choosen{
+        @apply text-blue-600
+      }
+    .green.choosen{
+        @apply text-green-700
+      }
+    .orange.choosen{
+        @apply text-orange-600
+      }
+    
+}
+
+.no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ 
+  .no-scrollbar {
+      -ms-overflow-style: none; 
+      scrollbar-width: none;  
+}
+.focus-1{
+    transition: all 0.3s ease-in-out;
+}
+
+.focus-1:focus{
+    transform: scale(0.95);
+}
+
+.bg-g{
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    position: relative;
+  }
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: animloader 2s linear infinite;
+  }
+  .loader::after {
+    animation-delay: 1s;
+  }
+  
+  @keyframes animloader {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+ .bsd-1{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ }
+
+ .slider-reveal img,
+ .slider-reveal h1{
+  transform: translateY(30px);
+  opacity: 0;
+  
+ }
+
+ .slider-reveal h1{
+  display: none;
+ }
+
+ .slider-reveal.choosen img,
+ .slider-reveal.choosen h1{
+  animation: sliderReavel 5s ease forwards;
+ }
+
+ .slider-reveal.choosen h1{
+  display: block;
+ }
+
+ @keyframes sliderReavel {
+  0%{
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+  }
+  10%,90%{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  100%{
+    transform: translateY(-30px);
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+ }
