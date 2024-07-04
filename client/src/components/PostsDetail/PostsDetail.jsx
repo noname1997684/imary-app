@@ -49,7 +49,7 @@ const PostsDetail = () => {
     setComment('')
     commentsRef.current.scrollIntoView({behavior:'smooth'})
   }
-  const recommendedPosts=posts.filter(({_id})=>_id!==post._id)
+  const recommendedPosts=posts.filter(({_id})=>_id!==post._id).slice(0,10)
   return (
     <section className='flex flex-col justify-center items-center gap-14'>
       <div className='flex max-w-[60vw] max-h-[95vh] rounded-3xl bsd-1'>
@@ -91,7 +91,7 @@ const PostsDetail = () => {
       </div>
       <h1 className='font-bold text-xl text-center'>Các ý tưởng khác</h1>
       <div className='w-full p-4 bg-g'>
-        
+      
         {recommendedPosts.length?( <div className='columns-5 gap-4 w-full space-y-3'>
         {
           recommendedPosts.map((post)=>(

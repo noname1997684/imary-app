@@ -1,10 +1,10 @@
 import * as api from '../api/index.js';
 import {FETCH_BY_SEARCH,COMMENT,CREATE,FETCH_ALL,DELETE,UPDATE,LOADING_END,LOADING_START,FETCH_POST} from '../constant/index.js'
 
-export const getPosts=(page)=>async(dispatch)=>{
+export const getPosts=(page,searchQuery)=>async(dispatch)=>{
     try{
         dispatch({type:LOADING_START})
-        const {data}= await api.fetchPosts(page)
+        const {data}= await api.fetchPosts(page,searchQuery)
         
         dispatch({type:FETCH_ALL,payload:data})
         dispatch({type:LOADING_END})
@@ -77,6 +77,7 @@ export const getPostsBySearch=(searchQuery)=>async(dispatch)=>{
     try{
         dispatch({type:LOADING_START})
         const {data:{data}}= await api.fetchPostsBySearch(searchQuery)
+        console.log(data)
         dispatch({type:FETCH_BY_SEARCH,payload:data})
         dispatch({type:LOADING_END})
     }

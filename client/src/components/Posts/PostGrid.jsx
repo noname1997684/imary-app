@@ -6,7 +6,7 @@ const PostGrid = () => {
   const {posts,isLoading}= useSelector((state)=>state.posts)
   if(!posts.length && !isLoading) return 'No Posts'
   return (
-    isLoading?(<div className='loader'></div>):(
+    isLoading ? <div className='loader'></div>:
     <div className='columns-5 gap-4 w-full space-y-3'>
         {
           posts.map((post)=>(
@@ -16,7 +16,7 @@ const PostGrid = () => {
           ))
         }
     </div>
-  ))
+  )
 }
 
 export default PostGrid
