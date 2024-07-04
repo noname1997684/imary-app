@@ -1,7 +1,7 @@
 import {React,useState,useEffect,useRef} from 'react'
 import { FaSearch } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
-import {getPostsBySearch} from '../../actions/posts'
+import {getPostsBySearch,getPosts} from '../../actions/posts'
 import {useNavigate,useLocation} from 'react-router-dom'
 import { BsXCircleFill } from "react-icons/bs";
 const SearchBox = () => {
@@ -25,8 +25,10 @@ const SearchBox = () => {
     }
     const searchPost=()=>{
         if(search.trim()){
-            dispatch(getPostsBySearch({search,tags:[]}))
-            navigate(`/posts/search?searchQuery=${search||'none'}`)
+            // dispatch(getPostsBySearch({search,tags:[]}))
+            // navigate(`/posts/search?searchQuery=${search||'none'}`)
+            dispatch(getPosts({search,tags:[]}))
+            navigate(`/posts/search?page=1&searchQuery=${search||"none"}`)
         }
         else{
             navigate('/posts')

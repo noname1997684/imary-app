@@ -15,13 +15,27 @@ export const createPost= async(req,res)=>{
 export const getPosts= async(req,res)=>{
 
     const {page}= req.query
-
+    console.log(page)
+    const {searchQuery,tags}= req.query
+    console.log(searchQuery,tags)
     try{
+        
         const LIMIT= 10
         const startIndex= (Number(page)-1)*LIMIT
-        const total= await Post.countDocuments({})
+        
+        if(searchQuery!=="none" || tags){
+            const title= new RegExp(searchQuery,'i')
+            const total= await Post.countDocuments({$or:[{title},{tags:{$in:tags.split(',')}}]})
+            const posts= await Post.find({$or:[{title},{tags:{$in:tags.split(',')}}]}).sort({_id:-1}).limit(LIMIT).skip(startIndex)
+        res.status(200).json({data:posts,currentPage:Number(page),numberOfPages:Math.ceil(total/LIMIT)})
+        }
+        else{
+            const total= await Post.countDocuments({})
         const posts= await Post.find().sort({_id:-1}).limit(LIMIT).skip(startIndex)
         res.status(200).json({data:posts,currentPage:Number(page),numberOfPages:Math.ceil(total/LIMIT)})
+        console.log("not search")
+        }
+        
     }catch(error){
         res.status(404).json({message:error.message})
     }
