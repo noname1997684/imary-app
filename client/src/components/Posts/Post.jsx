@@ -2,10 +2,8 @@ import React from 'react'
 import Likes from '../Likes/Likes'
 
 import { MdMoreHoriz } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import moment from 'moment'
 import { useDispatch } from 'react-redux';
-import {deletePost} from '../../actions/posts' 
 import { useNavigate } from 'react-router-dom';
 const Post = ({post}) => {
   const  navigate=useNavigate()
@@ -38,11 +36,6 @@ const Post = ({post}) => {
           <div className='flex justify-between mx-2 text-3xl z-10'>
         
           <Likes post={post}/>
-          {(user?.result?.sub===post?.creator||user?.result?._id===post?.creator)&&(
-            <button onClick={()=>{dispatch(deletePost(post._id))}}>
-          <MdDelete/>
-        </button>
-          )}
         
         </div>
         )}

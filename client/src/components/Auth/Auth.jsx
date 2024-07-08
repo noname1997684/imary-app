@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
-import {Avatar,Button,Grid, Paper, Typography,Container} from '@mui/material'
-import {MdLockOutline} from 'react-icons/md'
+import {Grid} from '@mui/material'
+
 import Input from './Input'
 import {Link,useNavigate} from 'react-router-dom'
 import Logo from "../../images/logo.png"
@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { signin,signup } from '../../actions/auth'
 import { GoogleLogin } from '@react-oauth/google'
 import {jwtDecode} from 'jwt-decode'
-
+import loginImg from '../../images/login.jpg'
 const Auth = () => {
 
 const initialState={
@@ -45,8 +45,8 @@ const initialState={
     }
    
   return (
-    <section>
-        <nav className='flex mx-auto justify-between py-5 sm:px-6 lg:px-8 bg-white'>
+    <section className='bg-a h-screen '>
+        <nav className='flex mx-auto justify-between py-5 sm:px-6 lg:px-8 bg-inherit '>
       <div className='flex items-center gap-4'>
       <Link className='flex items-center cursor-pointer' to="/">
         <img src={Logo} 
@@ -55,19 +55,15 @@ const initialState={
        height="45px" />
        <h1 className='font-extrabold'>IMARY</h1>
        </Link>
-       <button className='button-hover-1 focus-1'>Trang Chủ</button>
+
+       <Link className='button-hover-1 focus-1' to="/">Trang Chủ</Link>
       </div>
     </nav>
-    <Container component="main" maxWidth="xs">
-    
+    <div className='flex w-[96vw] mx-auto h-[90vh]  justify-center'>
+    <div className='w-1/2 h-[80vh] bg-white p-6 flex items-center justify-center flex-col max-[910px]:w-3/4'>
 
-        <Paper elevation={3}>
-            <Avatar>
-                <MdLockOutline />
-            </Avatar>
-
-        <Typography variant='h5'>{isSignup ? "Đăng ký": "Đăng nhập"}</Typography>
-        <form action="" onSubmit={handleSubmit}>
+        <h1 className='text-center font-bold text-4xl'>{isSignup ? "Đăng ký": "Đăng nhập"}</h1>
+        <form action="" onSubmit={handleSubmit} className='mt-9 flex flex-col justify-center items-center'>
             <Grid container spacing={2}>
                 {isSignup &&(
                     <>
@@ -115,10 +111,11 @@ const initialState={
                 )}
             </Grid>
 
-            <Button type='submit' fullWidth variant='contained' color="primary">
+            <button type='submit' className='mt-7 btn-grad light-btn'>
                 {isSignup ? "Đăng ký": "Đăng Nhập"}
-            </Button>
+            </button>
 <GoogleLogin
+className="w-100vw"
 onSuccess={res=>{
     const token=res.credential
     const result= jwtDecode(token)
@@ -133,17 +130,21 @@ onSuccess={res=>{
 />
             <Grid container justifyContent="flex-end">
                 <Grid item>
-                    <Button onClick={switchMode}>
-                        {isSignup ?
-                    "Đã có tài khoản ? Đăng nhập":
-                    "Chưa có tài khoản ? Đăng ký"    
+                    <button onClick={switchMode} className='mt-4 text-violet-400'>
+                        {isSignup ?(
+                    <h1>Đã có tài khoản ? <span className='font-bold'>Đăng nhập</span></h1>):
+                    (<h1>Chưa có tài khoản ? <span className='font-bold'> Đăng ký</span></h1>)   
                     }
-                    </Button>
+                    </button>
                 </Grid>
             </Grid>
         </form>
-        </Paper>
-    </Container>
+        
+    </div>
+    <div className='lg:w-4/6 h-[80vh] bg-white max-[910px]:hidden'>
+        <img src={loginImg} alt=""  className='object-cover w-full h-full scale-75 lg:scale-90 xl:scale-100'/>
+    </div>
+</div>
 </section>
   )
 }

@@ -33,10 +33,11 @@ export const updatedPost =(id,post,navigate)=>async(dispatch)=>{
     }
 }
 
-export const deletePost=(id)=>async(dispatch)=>{
+export const deletePost=(id,navigate)=>async(dispatch)=>{
     try{
 await api.deletePost(id)
 dispatch({type:DELETE,payload:id})
+navigate(`/posts`)
     }
     catch(error){
         console.log(error)
@@ -77,7 +78,7 @@ export const getPostsBySearch=(searchQuery)=>async(dispatch)=>{
     try{
         dispatch({type:LOADING_START})
         const {data:{data}}= await api.fetchPostsBySearch(searchQuery)
-        console.log(data)
+        
         dispatch({type:FETCH_BY_SEARCH,payload:data})
         dispatch({type:LOADING_END})
     }

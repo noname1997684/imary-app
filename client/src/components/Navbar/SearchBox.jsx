@@ -39,7 +39,7 @@ const SearchBox = () => {
         navigate('/posts')
     }
   return (
-    <section className='w-[50vw]'
+    <section className='xl:w-[50vw] w-[30vw]'
     onFocus={()=>{setFocus(true)}}
             onBlur={()=>{setFocus(false)}}>
         <div className='w-full h-full bg-gray-100 flex items-center px-4 py-4 gap-2 rounded-full' >
