@@ -15,10 +15,9 @@ const UpadatedPage = () => {
         title:'',
         message:'',
         tags:'',
-        selectedFile:''
     }
     const user=JSON.parse(localStorage.getItem('profile'))
-    const [postData,setPostData]=useState(post?post:initialState)
+    const [postData,setPostData]=useState(post)
     const handleSubmit=(e)=>{
         e.preventDefault()
         dispatch(updatedPost(id,{...postData,name:user?.result?.name},navigate))
@@ -32,31 +31,48 @@ const UpadatedPage = () => {
     }
     
   return (
-    <Paper elevation={6}>
-        <form 
+    <section className='bg-a w-screen h-[88vh] max-[850px]:h-fit up-section flex items-center justify-center px-11'>
+        <div className='flex w-[80vw] shadow-1 rounded-xl max-[850px]:flex-col'>
+<div className='bg-white w-1/2 h-[80vh] p-8 max-[850px]:w-full rounded-tl-xl rounded-bl-xl top-sec'>
+ <form 
         action=""
         autoComplete='off'
         noValidate
         onSubmit={handleSubmit}
+         className='flex flex-col gap-4 w-full h-full justify-center items-center'
         >
-            <Typography variant="h6">Sửa Bài</Typography>
+            <h1  className='text-center font-bold text-4xl mb-12'>Sửa Bài</h1>
             <TextField name="title" variant="outlined" label="Tiêu đề" fullWidth
             value={postData.title}
             onChange={handleChange}
+             color='secondary'
+            className='bg-violet-100'
             />
             <TextField name="message" variant="outlined" label="Nội dung" fullWidth
             value={postData.message}
             onChange={handleChange}
+             color='secondary'
+            className='bg-violet-100'
             />
             <TextField name="tags" variant="outlined" label="Nhãn dán" fullWidth
             value={postData.tags}
+             color='secondary'
+            className='bg-violet-100'
             onChange={(e)=>setPostData({...postData,tags:e.target.value.split(',')})}
             />
-            <img src={post.selectedFile}/>
-            <Button variant='contained' color='primary' size='large' type='submit' fullWidth>Submit</Button>
-            <Button variant='contained' color='secondary' size='small' fullWidth onClick={clear}>Clear</Button>
+            <div className='flex gap-4'>
+            <button  type='submit' className='btn-grad light-btn'>Submit</button>
+            <button type="button" className='btn-grad dark-btn' onClick={clear}>Clear</button>
+        </div>
         </form>
-    </Paper>
+</div>
+   <div className='bg-white w-1/2 h-[80vh] flex items-center justify-center py-4 rounded-tr-xl rounded-br-xl max-[850px]:w-full bottom-sec'>
+    <img src={post.selectedFile} className='max-h-full rounded-md'/>
+   </div>
+    
+       
+   </div>
+    </section>
   )
 }
 

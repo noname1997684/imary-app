@@ -7,7 +7,7 @@ const PostGrid = () => {
   if(!posts.length && !isLoading) return 'No Posts'
   return (
     isLoading ? <div className='loader'></div>:
-    <div className='columns-5 gap-4 w-full space-y-3'>
+    <div className='xl:columns-5 lg:columns-4 sm:columns-3 columns-2 gap-4 w-full space-y-3'>
         {
           posts.map((post)=>(
             

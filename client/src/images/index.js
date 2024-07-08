@@ -13,6 +13,7 @@ import food11 from './food11.jpg'
 import food12 from './food12.jpg'
 import food13 from './food13.jpg'
 import food14 from './food14.jpg'
+import food16 from './food16.jpg'
 import place1 from './place1.jpg'
 import place2 from './place2.jpg'
 import place3 from './place3.jpg'
@@ -21,6 +22,7 @@ import place5 from './place5.jpg'
 import place6 from './place6.jpg'
 import place7 from './place7.jpg'
 import place8 from './place8.jpg'
+import place9 from './place9.jpg'
 import dog1 from './dog1.jpg'
 import tree1 from './tree1.jpg'
 import home1 from './home1.jpg'
@@ -44,6 +46,7 @@ import flower2 from './flower2.jpeg'
 import flower3 from './flower3.jpeg'
 import flower4 from './flower4.jpeg'
 import flower5 from './flower5.jpeg'
+import flower6 from './flower6.jpeg'
 import night1 from './night1.jpg'
 import night2 from './night2.jpg'
 import night3 from './night3.jpg'
@@ -72,11 +75,17 @@ import pets11 from './pets11.jpg'
 import pets12 from './pets12.jpg'
 import pets13 from './pets13.jpg'
 import pets14 from './pets14.jpg'
+import pets15 from './pets15.jpg'
+import company1 from './company1.jpg'
+import family1 from './family1.jpg'
+import family2 from './family2.jpg'
+import family3 from './family3.jpg'
 
-export default {strawberry,food1,food2,food3,food4,food5,food6,food7,food8,food9,food10,food11,food12,food13,food14,
-place1,place2,place3,place4,place5,place6,place7,place8,
-flower1,flower2,flower3,flower4,flower5,
-dog1,tree1,art1,
+export default {strawberry,food1,food2,food3,food4,food5,food6,food7,food8,food9,food10,food11,food12,food13,food14,food16,
+place1,place2,place3,place4,place5,place6,place7,place8,place9,
+flower1,flower2,flower3,flower4,flower5,flower6,
+dog1,tree1,art1,company1,
+family1,family2,family3,
 home1,home2,home3,home4,home5,home6,home7,home8,home9,home10,home11,home12,home13,home14,home15,
 night1,night2,night3,night4,night5,night6,night7,night8,night9,night10,night11,night12,night13,night14,
-pets1,pets2,pets3,pets4,pets5,pets6,pets7,pets8,pets9,pets10,pets11,pets12,pets13,pets14}
+pets1,pets2,pets3,pets4,pets5,pets6,pets7,pets8,pets9,pets10,pets11,pets12,pets13,pets14,pets15}
