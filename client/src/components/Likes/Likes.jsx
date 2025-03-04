@@ -1,7 +1,7 @@
-import {React,useState} from 'react'
-import { FaRegThumbsUp,FaThumbsUp  } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import { likePost } from '../../actions/posts';
+import { useState } from "react";
+import {FaRegThumbsUp,FaThumbsUp} from "react-icons/fa"
+import {useDispatch} from "react-redux"
+import {likePost} from "../../actions/posts"
 const Likes = ({post}) => {
     const dispatch = useDispatch();
     const user=JSON.parse(localStorage.getItem('profile'))

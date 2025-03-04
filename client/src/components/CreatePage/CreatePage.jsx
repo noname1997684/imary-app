@@ -1,10 +1,10 @@
-import {React,useState} from 'react'
+import {useState} from 'react'
 import { TextField,Button,Typography,Paper } from '@mui/material'
 import FileBase from 'react-file-base64'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createPost } from '../../actions/posts' 
-import create from '../../images/create.PNG'
+import { createPost } from '../../actions/posts'
+import create from '../../assets/create.avif'
 const CreatePage = () => {
     const dispatch=useDispatch()
     const navigate= useNavigate()

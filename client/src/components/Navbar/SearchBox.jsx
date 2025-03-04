@@ -1,9 +1,9 @@
-import {React,useState,useEffect,useRef} from 'react'
-import { FaSearch } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import {getPostsBySearch,getPosts} from '../../actions/posts'
-import {useNavigate,useLocation} from 'react-router-dom'
-import { BsXCircleFill } from "react-icons/bs";
+import {useState,useEffect,useRef} from 'react'
+import{FaSearch} from "react-icons/fa"
+import {useDispatch} from "react-redux"
+import {getPostsBySearch,getPosts} from "../../actions/posts"
+import { useNavigate,useLocation } from 'react-router-dom'
+import {BsXCircleFill} from "react-icons/bs"
 const SearchBox = () => {
     const dispatch=useDispatch()
     const [search,setSearch]=useState('')

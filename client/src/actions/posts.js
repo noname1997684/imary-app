@@ -1,5 +1,5 @@
-import * as api from '../api/index.js';
-import {FETCH_BY_SEARCH,COMMENT,CREATE,FETCH_ALL,DELETE,UPDATE,LOADING_END,LOADING_START,FETCH_POST} from '../constant/index.js'
+import * as api from '../api/index.js'
+import {FETCH_BY_SEARCH,COMMENT,CREATE,FETCH_ALL,DELETE,UPDATE,LOADING_END,LOADING_START,FETCH_POST} from '../constant/index.js';
 
 export const getPosts=(page,searchQuery)=>async(dispatch)=>{
     try{
@@ -86,4 +86,3 @@ export const getPostsBySearch=(searchQuery)=>async(dispatch)=>{
         console.log(error)
     }
 }
-

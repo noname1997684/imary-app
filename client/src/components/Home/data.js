@@ -1,4 +1,4 @@
-import images from "../../images/index.js"
+import images from "../../assets/index.js"
 export const colors=["yellow-600","green-700","blue-600","orange-600"]
 export const data=[
     {   text:"Ý tưởng cho bữa ăn",
