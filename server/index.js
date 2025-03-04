@@ -18,7 +18,7 @@ app.use('/user',userRoutes)
 app.use('/posts',postRoutes)
 const port=process.env.PORT || 5000
 const __dirname= path.resolve()
-job.start()
+// job.start()
 if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'/client/dist')))
     app.get('*',(req,res)=>{
