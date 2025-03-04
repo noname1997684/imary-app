@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.js';
 import postRoutes from './routes/posts.js';
 import path from 'path';
+import job from './cron/cron.js';
 
 const app = express();
 dotenv.config();
@@ -28,3 +29,4 @@ mongoose.connect(process.env.CONNECTION_URL)
 .then(()=>app.listen(port,()=>console.log(`Server running on port: ${port}`)))
 .catch((error)=>console.log(error))
 
+job.start()
