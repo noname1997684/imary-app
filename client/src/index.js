@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import {thunk} from 'redux-thunk'
 import {applyMiddleware, createStore,compose} from 'redux'
 import reducer from './reducers/index.js'
-
+import { RecoilRoot } from 'recoil'
 
 
 const store = createStore(reducer,compose(applyMiddleware(thunk)))
@@ -14,7 +14,10 @@ const root = createRoot(document.getElementById('root'))
 
 root.render(
 <Provider store={store}>
-    <App/>
+<RecoilRoot>
+     <App/>
+</RecoilRoot>
+   
 </Provider>
 
 )

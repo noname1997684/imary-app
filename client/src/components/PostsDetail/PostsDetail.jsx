@@ -66,7 +66,7 @@ const PostsDetail = () => {
         </div>
         <p className=''>{post.message}</p>
         <div className='flex items-center gap-2 '>
-        <Avatar alt={user.result.name} src={user.result.picture}>{user.result.name.charAt(0)}</Avatar>
+        <Avatar alt={post.name} src="">{post.name.charAt(0)}</Avatar>
         <h1 className='font-bold'>{post.name}</h1>
         </div>
         <h1 className='font-bold'>

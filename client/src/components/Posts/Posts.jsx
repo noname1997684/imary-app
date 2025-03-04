@@ -1,14 +1,12 @@
-import {React,useEffect} from 'react'
+import {React} from 'react'
 import {Grow} from '@mui/material'
 import PostsGrid from './PostGrid'
-import { useDispatch,useSelector } from 'react-redux'
 
 import Pagination from './Pagination'
 import {useLocation} from 'react-router-dom'
-import { getPosts } from '../../actions/posts'
+
 const Posts = () => {
 
-const {isLoading}= useSelector((state)=>state.posts)
 function useQuery(){
     return new URLSearchParams(useLocation().search)
 }
@@ -17,10 +15,12 @@ function useQuery(){
 const query=useQuery()
 const page=query.get('page')||1
 const searchQuery=query.get('searchQuery')
+const tags= query.get('tags')
+console.log(searchQuery,page,tags)
   return (
       <Grow in>
         <section  className='bg-g w-full h-full p-4'>
-           <Pagination page={page} search={searchQuery}/> 
+           <Pagination page={page} search={searchQuery} tags={tags}/> 
                 <div className='p-5'>
                     <PostsGrid />
                 </div>

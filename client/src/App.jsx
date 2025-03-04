@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import {GoogleOAuthProvider} from '@react-oauth/google'
 import UpadatedPage from './components/UpdatedPage/UpadatedPage'
 import PostsDetail from './components/PostsDetail/PostsDetail'
+
 const App = () => {
 
   const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')))

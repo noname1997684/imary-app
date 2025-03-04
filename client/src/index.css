@@ -148,7 +148,8 @@
  .slider-reveal h1{
   transform: translateY(30px);
   opacity: 0;
-  
+  visibility: hidden;
+  display: none;
  }
 
  .slider-reveal h1{
@@ -158,6 +159,8 @@
  .slider-reveal.choosen img,
  .slider-reveal.choosen h1{
   animation: sliderReavel 5s ease forwards;
+  visibility: visible;
+  display: block;
  }
 
  .slider-reveal.choosen h1{
@@ -200,6 +203,23 @@
   }
   
  }
+
+.pointdown{
+  animation: pointDown 4s ease infinite;
+
+}
+
+@keyframes pointDown{
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(10px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
 
 @media screen and (max-width: 1280px){
   .fourth-section{

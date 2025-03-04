@@ -1,10 +1,12 @@
-import React,{useState,useEffect} from 'react'
-
+import React,{useState,useEffect, useRef} from 'react'
 import images from '../../images/index.js'
 import {FaSearch} from 'react-icons/fa'
-import {data,colors} from './data.js'
+import {data} from './data.js'
 import img from '../../images/4.jpg'
 import bg from '../../images/bg-like.avif'
+import { IoIosArrowDown } from "react-icons/io";
+import { useNavigate } from 'react-router-dom'
+
 const Home = () => {
   const nextSlide=()=>{
     setIndex((index+1)%data.length)
@@ -13,18 +15,20 @@ const Home = () => {
     const interval=setInterval(nextSlide,6500)
     return ()=>clearInterval(interval)
   })
+  const navigate=useNavigate()
   const [index, setIndex]=useState(0)
+  const pageRef= useRef(null)
   console.log(data)
 
   return (
-    <main className='snap-y snap-mandatory overflow-y-scroll h-screen'>
-    <section className='flex flex-col  items-center h-[85vh] mt-6 snap-center'>
+    <main className='snap-y snap-mandatory overflow-y-scroll h-screen '>
+    <section className='flex flex-col  items-center h-[85vh] mt-6 snap-center relative'>
     <div className='relative w-full '>
     <div className='flex items-center flex-col gap-3 text-4xl  md:text-5xl' id='text-animation'>
         <h1 className='font-semibold '>Cùng nhau khám phá</h1>
         <div className='mb-3'>
         {data.map((item,i)=>(
-          <div className={`slider-reveal ${item.color} ${i===index?"choosen": ""}`} key={i}>
+          <div className={`slider-reveal ${item.color} ${i===index?"choosen": ""}`} key={i} >
           <h1 className={`font-semibold `}>{item.text}</h1>
           </div>
         ))}
@@ -38,7 +42,9 @@ const Home = () => {
     
     </div>
     {data.map((item,i)=>(
-      <div className={`flex px-2  justify-around  gap-2 mt absolute top-1 md:top-16  h-[84vh] md:h-[76vh] overflow-hidden -z-20 slider-reveal ${i===index?"choosen":""}`} id="item" >
+      <div className={`flex px-2  justify-around  gap-2 mt absolute top-1 md:top-16  h-[84vh] md:h-[76vh] overflow-hidden  slider-reveal ${i===index?"choosen":""} cursor-pointer`} id="item" onClick={()=>{
+        navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${item.search}`)
+        }}>
       <div className=' gap-4  flex-col hidden xl:flex'>
         <img src={item.images[0]} alt="img"
         className='rounded-2xl w-[236px] h-[360px] object-cover'/>
@@ -124,10 +130,22 @@ const Home = () => {
     ))}
 
     </div>
+    <div className='absolute bottom-3 '>
+      {data.map((item,i)=>(
+        <button className={`text-white text-3xl font-extrabold ${item.color} ${i===index?"active":"hidden"}  p-3 rounded-full pointdown`} key={i}
+        onClick={
+          ()=>pageRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})
+        }
+        >
+      <IoIosArrowDown />
+      </button>
+      ))}
+      
+    </div>
     </section>
-    <section className='flex items-center relative bg-yellow-200 h-screen -z-50 snap-center second-section'>
+    <section className='flex items-center relative bg-yellow-200 h-screen  snap-center second-section' ref={pageRef}>
       <div className='w-[50vw] flex tems-center justify-center max-[830px]:hidden'>
-    <div className='relative h-fit  w-fit'>
+    <div className='relative h-fit  w-fit z-10 cursor-pointer' onClick={()=>navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['beach']}`)}>
       <div className=' -z-10 absolute -left-36 top-12'>
       <img src={images.place7} alt="" 
       
@@ -158,7 +176,7 @@ const Home = () => {
     <div className='flex flex-col items-center gap-8 w-[50vw] max-[830px]:w-full'>
       <h1 className='text-red-700 font-bold text-4xl  md:text-5xl '>Tìm kiếm ý tưởng</h1>
       <p className='max-w-80 text-center font-medium md:text-lg text-red-700 text-base'>Bạn muốn thử sức những thứ mới mẻ? Hãy tìm kiếm những thứ bạn cần và cùng nhau khám phá chúng</p>
-      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold'>Tìm hiểu</button>
+      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold cursor-pointer' onClick={()=>navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['beach']}`)}>Tìm hiểu</button>
     </div>
     
     <div className='sm:columns-4 columns-3 4 min-[830px]:hidden mt-7 grid-third'>
@@ -192,15 +210,15 @@ const Home = () => {
     </div>  
     </div>
     </section>
-    <section className='flex w-full items-center relative bg-teal-100 h-screen -z-50 snap-center fourth-sec'>
+    <section className='flex w-full items-center relative bg-teal-100 h-screen snap-center fourth-sec'>
     <div className='flex flex-col items-center gap-8 w-[50vw]'>
       <h1 className='text-teal-800 font-bold max-[1090px]:w-[360px] text-center text-4xl  md:text-5xl'>Tạo nên những bức ảnh</h1>
       <p className='max-w-80 text-center font-medium text-lg text-teal-800'>Tạo nên những thứ mới mẻ để mọi người cùng thưởng thức</p>
-      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold'>Tìm hiểu</button>
+      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold' onClick={()=>navigate(`/auth`)}>Tìm hiểu</button>
     </div>
     <div className=' w-[50vw] h-screen fourth-section max-[830px]:hidden'>
       <div className='relative w-fit mt-7 main-fourth'>
-      <div className='absolute -top-4 -right-64 z-10 hidden xl:block'>
+      <div className='absolute -top-4 -right-64 z-10 hidden xl:block cursor-pointer' onClick={()=> navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['peace']}`)}>
         
         <img src={images.place8} alt="" 
         
@@ -209,29 +227,29 @@ const Home = () => {
         <h1 className='text-white font-bold text-2xl absolute bottom-4 left-4'>Cảnh thanh bình</h1>
 
       </div>
-      <div className='absolute top-52 -right-48 z-20 hidden xl:block'>
+      <div className='absolute top-52 -right-48 z-20 hidden xl:block cursor-pointer' onClick={()=> navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['pets']}`)}>
         <img src={images.dog1} alt="" 
         
         className='rounded-[30px] object-cover w-[165px] h-[173px] '/>
         <h1 className='text-white font-bold text-xl absolute bottom-4 left-4 w-[100px]'>Thú cưng đáng yêu</h1>
 
       </div>
-      <div className='absolute xl:-bottom-64 xl:right-24  bottom-16  z-20 fourth-image max-[890px]:hidden'>
+      <div className='absolute xl:-bottom-64 xl:right-24  bottom-16  z-20 fourth-image max-[890px]:hidden cursor-pointer' onClick={()=> navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['plants']}`)}>
         <img src={images.tree1} alt="" 
         
         className='rounded-[30px] object-cover w-[223px] h-[235px] '/>
         <h1 className='text-white font-bold text-2xl absolute bottom-4 left-4 '>Cây cảnh trong nhà</h1>
 
       </div>
-      <div className='absolute bottom-16 xl:-bottom-60 xl:-right-56 -right-8 z-20 max-[890px]:hidden'>
+      <div className='absolute bottom-16 xl:-bottom-60 xl:-right-56 -right-8 z-20 max-[890px]:hidden cursor-pointer' onClick={()=> navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['home']}`)}>
         <img src={images.home1} alt="" 
         className='rounded-[30px] object-cover w-[223px] h-[235px] '/>
         <h1 className='text-white font-bold text-2xl absolute bottom-4 left-4'>Trang trí nội thất</h1>
 
       </div>
-      <div className='relative max-[830px]:hidden'>
+      <div className='relative max-[830px]:hidden cursor-pointer' onClick={()=> navigate(`/posts/search?page=1&searchQuery=${'none'}&tags=${['flowers']}`)}>
         <img src={images.flower5} alt="" 
-        className='rounded-[30px] object-cover w-[380px] h-[400px] '/>
+        className='rounded-[30px] object-cover w-[380px] h-[400px] ' />
         <div className='absolute bottom-2 left-6'>
         <h1 className='text-white font-bold text-3xl mb-3'>Loài hoa tôi thích</h1>
         <div className='flex gap-2'>
@@ -282,7 +300,7 @@ const Home = () => {
       <div className='flex flex-col items-center justify-center gap-8 w-[50vw] bg-pink-200 h-full last-title max-[830px]:w-full'>
       <h1 className='text-pink-800 font-bold text-4xl  md:text-5xl max-w-[460px] text-center max-[830px]:max-w-full mt-5'>Giao lưu cùng những người khác</h1>
       <p className='max-w-80 text-center font-medium text-lg text-pink-800'>Bày tỏ cảm xúc và chia sẻ những cảm nghĩ của bản thân về những bức ảnh của mọi người</p>
-      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold'>Tìm hiểu</button>
+      <button className='bg-red-500 text-white px-5 py-4 rounded-full font-bold' onClick={()=>navigate(`/auth`)}>Tìm hiểu</button>
     </div>
     <div className='min-[830px]:hidden'>
       <img src={img} alt="" />

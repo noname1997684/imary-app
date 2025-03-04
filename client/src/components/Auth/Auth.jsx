@@ -9,6 +9,8 @@ import { signin,signup } from '../../actions/auth'
 import { GoogleLogin } from '@react-oauth/google'
 import {jwtDecode} from 'jwt-decode'
 import loginImg from '../../images/login.jpg'
+import { useRecoilState} from 'recoil'
+import { AuthStateAtom } from '../../atoms/authAtom'
 const Auth = () => {
 
 const initialState={
@@ -19,14 +21,15 @@ const initialState={
     confirmPassword:''
 }
 
-    const [isSignup, setIsSignup] = useState(false)
+    // const [isSignup, setIsSignup] = useState(false)
+    const [authStateValue,setAuthStateValue] = useRecoilState(AuthStateAtom)
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch()
    const navigate = useNavigate()
     const handleSubmit=(e)=>{
         e.preventDefault()
-        if(isSignup){
+        if(authStateValue === 'signup'){
             dispatch(signup(formData,navigate))
         }else{
             dispatch(signin(formData,navigate))
@@ -36,7 +39,7 @@ const initialState={
         setFormData({...formData,[e.target.name]:e.target.value})
     }
     const switchMode=()=>{
-        setIsSignup((prevIsSignup)=>!prevIsSignup)
+        setAuthStateValue((prev)=>prev==='login'?'signup':'login')
         setShowPassword(false)
         setFormData(initialState)
     }
@@ -62,10 +65,10 @@ const initialState={
     <div className='flex w-[96vw] mx-auto h-[90vh]  justify-center'>
     <div className='w-1/2 h-[80vh] bg-white p-6 flex items-center justify-center flex-col max-[910px]:w-3/4'>
 
-        <h1 className='text-center font-bold text-4xl'>{isSignup ? "Đăng ký": "Đăng nhập"}</h1>
+        <h1 className='text-center font-bold text-4xl'>{authStateValue==="signup" ? "Đăng ký": "Đăng nhập"}</h1>
         <form action="" onSubmit={handleSubmit} className='mt-9 flex flex-col justify-center items-center'>
             <Grid container spacing={2}>
-                {isSignup &&(
+                {authStateValue==="signup" &&(
                     <>
                     <Input
                     name="firstName"
@@ -100,7 +103,7 @@ const initialState={
                 type={showPassword?'text':'password'}
                 handleShowPassword={handleShowPassword}
                 />
-                {isSignup && (
+                {authStateValue==="signup" && (
                     <Input
                     name="confirmPassword"
                     value={formData.confirmPassword}
@@ -112,7 +115,7 @@ const initialState={
             </Grid>
 
             <button type='submit' className='mt-7 btn-grad light-btn'>
-                {isSignup ? "Đăng ký": "Đăng Nhập"}
+                {authStateValue==="signup" ? "Đăng ký": "Đăng Nhập"}
             </button>
 <GoogleLogin
 className="w-100vw"
@@ -131,7 +134,7 @@ onSuccess={res=>{
             <Grid container justifyContent="flex-end">
                 <Grid item>
                     <button onClick={switchMode} className='mt-4 text-violet-400'>
-                        {isSignup ?(
+                        {authStateValue==="signup" ?(
                     <h1>Đã có tài khoản ? <span className='font-bold'>Đăng nhập</span></h1>):
                     (<h1>Chưa có tài khoản ? <span className='font-bold'> Đăng ký</span></h1>)   
                     }

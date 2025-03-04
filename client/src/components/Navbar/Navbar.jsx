@@ -8,7 +8,10 @@ import {Avatar} from '@mui/material'
 import SearchBox from './SearchBox'
 import { IoIosLogOut,IoMdHome,IoMdCreate   } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import { AuthStateAtom } from '../../atoms/authAtom'
+import { useRecoilState } from 'recoil'
 const Navbar = () => {
+  const [authStateValue,setAuthStateValue]=useRecoilState(AuthStateAtom)
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const location = useLocation()
@@ -113,8 +116,8 @@ const Navbar = () => {
         </div>
       ):(
       <div className='gap-2 flex'>
-        <Link to="/auth" className='text-white bg-red-600 hover:bg-red-700 rounded-full px-2.5 py-2 focus-1 font-semibold focus:bg-red-700'>Đăng Nhập</Link>
-        <button className='bg-gray-200 hover:bg-gray-300 rounded-full px-2.5 py-2 focus-1 font-semibold'>Đăng ký</button>
+        <Link to="/auth" className='text-white bg-red-600 hover:bg-red-700 rounded-full px-3 py-2 focus-1 font-semibold focus:bg-red-700' onClick={()=>setAuthStateValue('login')}>Đăng Nhập</Link>
+        <Link to="/auth" className='bg-gray-200 hover:bg-gray-300 rounded-full px-3 py-2 focus-1 font-semibold' onClick={()=>setAuthStateValue("signup")}>Đăng ký</Link>
       </div>
       )}
      

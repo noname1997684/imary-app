@@ -3,12 +3,16 @@ import { Pagination,PaginationItem } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { getPosts } from '../../actions/posts'
 import { useDispatch,useSelector } from 'react-redux'
-const Paginate = ({page,search}) => {
+const Paginate = ({page,search,tags}) => {
  console.log(page)
   const {numberOfPages}= useSelector((state)=>state.posts)
   const dispatch=useDispatch()
 
   useEffect(()=>{
+    if(tags){
+      dispatch(getPosts(page,{search,tags:tags.split(',')}))
+      return
+    }
     if(page) dispatch(getPosts(page,{search,tags:[]}))
   },[page])
 

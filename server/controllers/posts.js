@@ -15,9 +15,7 @@ export const createPost= async(req,res)=>{
 export const getPosts= async(req,res)=>{
 
     const {page}= req.query
-    console.log(page)
     const {searchQuery,tags}= req.query
-    console.log(searchQuery,tags)
     try{
         
         const LIMIT= 10
@@ -33,7 +31,6 @@ export const getPosts= async(req,res)=>{
             const total= await Post.countDocuments({})
         const posts= await Post.find().sort({_id:-1}).limit(LIMIT).skip(startIndex)
         res.status(200).json({data:posts,currentPage:Number(page),numberOfPages:Math.ceil(total/LIMIT)})
-        console.log("not search")
         }
         
     }catch(error){
